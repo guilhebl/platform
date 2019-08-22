@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { EntityAction } from '../actions/entity-action';
 import { EntityCache } from '../reducers/entity-cache';
 import { EntityCollectionService } from './entity-collection-service';
+import { EntityCollectionServiceFactory } from './entity-collection-service-factory';
 
 // tslint:disable:member-ordering
 

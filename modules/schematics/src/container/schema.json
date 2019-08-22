@@ -97,13 +97,6 @@
       "type": "string",
       "default": "State",
       "description": "Specifies the interface for the state."
-    },
-    "testDepth": {
-      "description":
-        "Specifies whether to create a unit test or an integration test.",
-      "enum": ["unit", "integration"],
-      "type": "string",
-      "default": "integration"
     }
   },
   "required": []

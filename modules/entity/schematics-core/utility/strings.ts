@@ -114,7 +114,7 @@ export function capitalize(str: string): string {
  Returns the plural form of a string
 
  ```javascript
- 'innerHTML'.pluralize()         // 'innerHTMLs'
+ 'innerHTML'.pluralize()         // 'InnerHTMLs'
  'action_name'.pluralize()       // 'actionNames'
  'css-class-name'.pluralize()    // 'cssClassNames'
  'regex'.pluralize()            // 'regexes'

@@ -4,7 +4,14 @@ import { Actions, Effect } from '@ngrx/effects';
 import { Update } from '@ngrx/entity';
 
 import { asyncScheduler, Observable, of, race, SchedulerLike } from 'rxjs';
-import { catchError, delay, filter, map, mergeMap } from 'rxjs/operators';
+import {
+  concatMap,
+  catchError,
+  delay,
+  filter,
+  map,
+  mergeMap,
+} from 'rxjs/operators';
 
 import { EntityAction } from '../actions/entity-action';
 import { EntityActionFactory } from '../actions/entity-action-factory';

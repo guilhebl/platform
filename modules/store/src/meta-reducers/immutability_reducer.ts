@@ -20,20 +20,16 @@ function freeze(target: any) {
   const targetIsFunction = isFunction(target);
 
   Object.getOwnPropertyNames(target).forEach(prop => {
+    const propValue = target[prop];
     if (
       hasOwnProperty(target, prop) &&
       (targetIsFunction
         ? prop !== 'caller' && prop !== 'callee' && prop !== 'arguments'
-        : true)
+        : true) &&
+      (isObjectLike(propValue) || isFunction(propValue)) &&
+      !Object.isFrozen(propValue)
     ) {
-      const propValue = target[prop];
-
-      if (
-        (isObjectLike(propValue) || isFunction(propValue)) &&
-        !Object.isFrozen(propValue)
-      ) {
-        freeze(propValue);
-      }
+      freeze(propValue);
     }
   });
 

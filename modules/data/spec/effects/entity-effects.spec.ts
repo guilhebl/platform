@@ -4,7 +4,7 @@ import { Action } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
 import { Update } from '@ngrx/entity';
 
-import { of, merge, ReplaySubject, throwError, timer } from 'rxjs';
+import { Observable, of, merge, ReplaySubject, throwError, timer } from 'rxjs';
 import { delay, first, mergeMap } from 'rxjs/operators';
 
 import {

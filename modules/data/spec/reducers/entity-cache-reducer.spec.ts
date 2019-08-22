@@ -28,6 +28,7 @@ import {
   ChangeSet,
   ChangeSetOperation,
   Logger,
+  EntityMetadata,
 } from '../..';
 
 class Hero {

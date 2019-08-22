@@ -2,8 +2,17 @@
 import { TestBed } from '@angular/core/testing';
 import { Action } from '@ngrx/store';
 import { Actions } from '@ngrx/effects';
-import { observeOn } from 'rxjs/operators';
-import { asapScheduler, ReplaySubject, Subject } from 'rxjs';
+
+import {
+  asapScheduler,
+  Observable,
+  of,
+  merge,
+  ReplaySubject,
+  Subject,
+  throwError,
+} from 'rxjs';
+import { first, mergeMap, observeOn, tap } from 'rxjs/operators';
 
 import {
   EntityCacheEffects,

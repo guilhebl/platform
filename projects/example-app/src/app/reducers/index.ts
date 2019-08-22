@@ -4,6 +4,7 @@ import {
   ActionReducer,
   MetaReducer,
   Action,
+  combineReducers,
   ActionReducerMap,
 } from '@ngrx/store';
 import { environment } from '../../environments/environment';
@@ -24,7 +25,7 @@ import { InjectionToken } from '@angular/core';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-  [fromLayout.layoutFeatureKey]: fromLayout.State;
+  layout: fromLayout.State;
   router: fromRouter.RouterReducerState<any>;
 }
 
@@ -37,7 +38,7 @@ export const ROOT_REDUCERS = new InjectionToken<
   ActionReducerMap<State, Action>
 >('Root reducers token', {
   factory: () => ({
-    [fromLayout.layoutFeatureKey]: fromLayout.reducer,
+    layout: fromLayout.reducer,
     router: fromRouter.routerReducer,
   }),
 });
@@ -46,11 +47,11 @@ export const ROOT_REDUCERS = new InjectionToken<
 export function logger(reducer: ActionReducer<State>): ActionReducer<State> {
   return (state, action) => {
     const result = reducer(state, action);
-    console.groupCollapsed(action.type);
-    console.log('prev state', state);
-    console.log('action', action);
-    console.log('next state', result);
-    console.groupEnd();
+    // console.groupCollapsed(action.type);
+    // console.log('prev state', state);
+    // console.log('action', action);
+    // console.log('next state', result);
+    // console.groupEnd();
 
     return result;
   };

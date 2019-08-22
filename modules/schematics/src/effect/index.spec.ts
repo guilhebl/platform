@@ -126,39 +126,6 @@ describe('Effect Schematic', () => {
     expect(content).toMatch(/EffectsModule\.forRoot\(\[FooEffects\]\)/);
   });
 
-  it('should register the root effect module without effect with the minimal flag', () => {
-    const options = {
-      ...defaultOptions,
-      root: true,
-      name: undefined,
-      module: 'app.module.ts',
-      minimal: true,
-    };
-
-    const tree = schematicRunner.runSchematic('effect', options, appTree);
-    const content = tree.readContent(`${projectPath}/src/app/app.module.ts`);
-
-    expect(content).toMatch(/EffectsModule\.forRoot\(\[\]\)/);
-    expect(content).not.toMatch(/FooEffects/);
-  });
-
-  it('should still register the feature effect module with an effect with the minimal flag', () => {
-    const options = {
-      ...defaultOptions,
-      root: false,
-      module: 'app.module.ts',
-      minimal: true,
-    };
-
-    const tree = schematicRunner.runSchematic('effect', options, appTree);
-    const content = tree.readContent(`${projectPath}/src/app/app.module.ts`);
-
-    expect(content).toMatch(/EffectsModule\.forFeature\(\[FooEffects\]\)/);
-    expect(
-      tree.files.indexOf(`${projectPath}/src/app/foo/foo.effects.ts`)
-    ).toBeGreaterThanOrEqual(0);
-  });
-
   it('should register the feature effect in the provided module', () => {
     const options = { ...defaultOptions, module: 'app.module.ts' };
 
@@ -401,20 +368,6 @@ describe('Effect Schematic', () => {
     expect(content).not.toMatch(/@Effect\(\)/);
     expect(content).toMatch(
       /loadFoos\$ = createEffect\(\(\) => this.actions\$.pipe\(/
-    );
-  });
-
-  it('should inject the effect service correctly', async () => {
-    const options = { ...defaultOptions, spec: true };
-    const tree = await schematicRunner
-      .runSchematicAsync('effect', options, appTree)
-      .toPromise();
-    const content = tree.readContent(
-      `${projectPath}/src/app/foo/foo.effects.spec.ts`
-    );
-
-    expect(content).toMatch(
-      /effects = TestBed\.get<FooEffects>\(FooEffects\);/
     );
   });
 });

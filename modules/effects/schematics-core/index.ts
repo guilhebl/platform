@@ -7,7 +7,6 @@ import {
   group,
   capitalize,
   featurePath,
-  pluralize,
 } from './utility/strings';
 
 export {
@@ -65,7 +64,6 @@ export const stringUtils = {
   group,
   capitalize,
   featurePath,
-  pluralize,
 };
 
 export { updatePackage } from './utility/update';

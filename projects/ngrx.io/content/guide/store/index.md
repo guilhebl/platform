@@ -7,18 +7,11 @@ Store is RxJS powered state management for Angular applications, inspired by Red
 - [Actions](guide/store/actions) describe unique events that are dispatched from components and services.
 - State changes are handled by pure functions called [reducers](guide/store/reducers) that take the current state and the latest action to compute a new state.
 - [Selectors](guide/store/selectors) are pure functions used to select, derive and compose pieces of state.
-- State is accessed with the `Store`, an observable of state and an observer of actions.
+- State accessed with the `Store`, an observable of state and an observer of actions.
 
 ## Installation
 
 Detailed installation instructions can be found on the [Installation](guide/store/install) page.
-
-## Diagram
-
-The following diagram represents the overall general flow of application state in NgRx. 
-<figure>
-  <img src="generated/images/guide/store/state-management-lifecycle.png" alt="NgRx State Management Lifecycle Diagram" width="100%" height="100%" />
-</figure>
 
 ## Tutorial
 

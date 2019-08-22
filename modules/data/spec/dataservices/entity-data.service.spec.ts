@@ -7,6 +7,11 @@ import { Observable } from 'rxjs';
 import { Update } from '@ngrx/entity';
 
 import {
+  createEntityDefinition,
+  EntityDefinition,
+  EntityMetadata,
+  EntityMetadataMap,
+  ENTITY_METADATA_TOKEN,
   DefaultDataService,
   DefaultDataServiceFactory,
   HttpUrlGenerator,

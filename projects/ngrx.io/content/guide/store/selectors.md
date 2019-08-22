@@ -135,8 +135,6 @@ The `createFeatureSelector` is a convenience method for returning a top level fe
 <code-example header="index.ts">
 import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-export const featureKey = 'feature';
-
 export interface FeatureState {
   counter: number;
 }
@@ -145,7 +143,7 @@ export interface AppState {
   feature: FeatureState;
 }
 
-export const selectFeature = createFeatureSelector&lt;AppState, FeatureState&gt;(featureKey);
+export const selectFeature = createFeatureSelector&lt;AppState, FeatureState&gt;('feature');
 
 export const selectFeatureCount = createSelector(
   selectFeature,
@@ -153,10 +151,10 @@ export const selectFeatureCount = createSelector(
 );
 </code-example>
 
-The following selector below would not compile because `fooFeatureKey` (`'foo'`) is not a feature slice of `AppState`.
+The following selector below would not compile because `foo` is not a feature slice of `AppState`.
 
 <code-example header="index.ts">
-export const selectFeature = createFeatureSelector&lt;AppState, FeatureState&gt;(fooFeatureKey);
+export const selectFeature = createFeatureSelector&lt;AppState, FeatureState&gt;('foo');
 </code-example>
 
 ## Resetting Memoized Selectors

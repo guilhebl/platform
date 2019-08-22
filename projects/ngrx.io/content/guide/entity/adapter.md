@@ -238,7 +238,7 @@ export const selectUserState = createFeatureSelector&lt;fromUser.State&gt;('user
 
 export const selectUserIds = createSelector(
   selectUserState,
-  fromUser.selectUserIds // shorthand for usersState => fromUser.selectUserIds(usersState)
+  fromUser.selectUserIds
 );
 export const selectUserEntities = createSelector(
   selectUserState,

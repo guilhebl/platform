@@ -33,7 +33,6 @@ npm_package(
         "**/src/*/files/**/*",
         "**/src/*/common-files/**/*",
         "**/src/*/creator-files/**/*",
-        "**/src/*/integration-files/**/*",
         "**/schema.json",
         "**/migration.json",
     ]),
@@ -57,7 +56,6 @@ ts_test_library(
         "**/src/*/files/**/*",
         "**/src/*/common-files/**/*",
         "**/src/*/creator-files/**/*",
-        "**/src/*/integration-files/**/*",
         "**/*.json",
     ]),
     deps = [

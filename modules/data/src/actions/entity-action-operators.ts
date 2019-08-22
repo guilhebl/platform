@@ -1,4 +1,7 @@
-import { OperatorFunction } from 'rxjs';
+import { Action } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
+
+import { Observable, OperatorFunction } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { EntityAction } from './entity-action';

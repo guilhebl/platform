@@ -5,8 +5,4 @@ export interface Schema {
   module?: string;
   statePath?: string;
   stateInterface?: string;
-  /**
-   * Setup state management without registering initial reducers.
-   */
-  minimal?: boolean;
 }

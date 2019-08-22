@@ -42,8 +42,7 @@ describe('AppComponent', () => {
         MockAioDocViewerComponent,
         MockAioDtComponent,
         MockAioLazyCeComponent,
-        MockAioFooterComponent,
-        MockAioSearchBoxComponent
+        MockAioFooterComponent
       ],
       imports: [
         MatProgressBarModule,
@@ -371,6 +370,12 @@ describe('AppComponent', () => {
         expect(component.showSearchResults).toBe(true);
       });
 
+      it('should show developer source view if the footer is clicked while holding the meta and alt keys', () => {
+        component.dtOn = false;
+        expect(component.onClick({ tagName: 'FOOTER'} as HTMLElement, 0, false, true, true)).toBeFalsy();
+        expect(component.dtOn).toBeTruthy();
+      });
+
       it('should return the result of handleAnchorClick when anchor is clicked', () => {
         const anchorElement: HTMLAnchorElement = document.createElement('a');
         spyOn(locationService, 'handleAnchorClick').and.returnValue(true);
@@ -613,9 +618,3 @@ class MockAioFooterComponent {
   @Input() nodes;
   @Input() versionInfo;
 }
-
-@Component({
-  selector: 'aio-search-box',
-  template: ''
-})
-class MockAioSearchBoxComponent {}

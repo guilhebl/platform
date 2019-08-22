@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { MetaReducer } from '@ngrx/store';
+import { Action, ActionReducer, MetaReducer } from '@ngrx/store';
 import { EntityCache } from './entity-cache';
 
 export const ENTITY_CACHE_NAME = 'entityCache';

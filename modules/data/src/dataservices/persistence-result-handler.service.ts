@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Action } from '@ngrx/store';
 
+import { Observable, of } from 'rxjs';
+
 import {
   DataServiceError,
   EntityActionDataServiceError,
 } from './data-service-error';
 import { EntityAction } from '../actions/entity-action';
 import { EntityActionFactory } from '../actions/entity-action-factory';
-import { makeErrorOp, makeSuccessOp } from '../actions/entity-op';
+import { EntityOp, makeErrorOp, makeSuccessOp } from '../actions/entity-op';
 import { Logger } from '../utils/interfaces';
 
 /**

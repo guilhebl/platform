@@ -39,8 +39,4 @@ export interface Schema {
    * Specifies the interface for the state
    */
   stateInterface?: string;
-  /**
-   * Setup state management without registering initial reducers.
-   */
-  minimal?: boolean;
 }

@@ -1,0 +1,44 @@
+mat-card-title,
+mat-card-content,
+mat-card-footer {
+  display: flex;
+  justify-content: center;
+}
+
+mat-icon {
+  cursor: pointer;
+}
+
+mat-card-footer {
+  color: #ff0000;
+  padding: 5px 0;
+}
+
+.example-fill-remaining-space {
+  /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+.mat-form-field {
+  min-width: 300px;
+  margin-right: 10px;
+}
+
+.mat-form-field-select {
+  min-width: 140px;
+  margin-left: 10px; 
+  margin-right: 10px;
+}
+
+.mat-spinner {
+  position: relative;
+  top: 10px;
+  left: 10px;
+  opacity: 0;
+  padding-left: 60px; // Make room for the spinner
+}
+
+.mat-spinner.show {
+  opacity: 1;
+}

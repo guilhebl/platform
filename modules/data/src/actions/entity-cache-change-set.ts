@@ -1,4 +1,9 @@
+import { Action } from '@ngrx/store';
 import { Update } from '@ngrx/entity';
+
+import { EntityActionOptions } from './entity-action';
+import { EntityCacheAction } from './entity-cache-action';
+import { DataServiceError } from '../dataservices/data-service-error';
 
 export enum ChangeSetOperation {
   Add = 'Add',
@@ -80,7 +85,7 @@ export class ChangeSetItemFactory {
   }
 
   /** Create the ChangeSetUpdate for Updates of entities of the given entity type */
-  update<T extends { id: string | number }>(
+  update<T extends { id: string }>(
     entityName: string,
     updates: Update<T> | Update<T>[]
   ): ChangeSetUpdate<T> {

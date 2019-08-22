@@ -63,7 +63,7 @@ export default function(options: EntityOptions): Rule {
 
     return chain([
       addReducerToState({ ...options, plural: true }),
-      addReducerImportToNgModule({ ...options, plural: true }),
+      addReducerImportToNgModule({ ...options }),
       branchAndMerge(
         chain([mergeWith(commonTemplates), mergeWith(templateSource)])
       ),

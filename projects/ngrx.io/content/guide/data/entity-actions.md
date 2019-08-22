@@ -113,9 +113,8 @@ e.g., `'[Hero] NgRx Data/query-all'`.
 Here's an example that uses the injectable `EntityActionFactory` to construct the default "query all heroes" action.
 
 ```typescript
-const action = this.entityActionFactory.create<Hero>(
-  'Hero',
-  EntityOp.QUERY_ALL
+const action = entityActionFactory<Hero>(
+  'Hero', EntityOp.QUERY_ALL, null, 'Load Heroes On Start'
 );
 
 store.dispatch(action);
@@ -124,8 +123,8 @@ store.dispatch(action);
 Thanks to the NgRx Data _Effects_, this produces _two_ actions in the log, the first to initiate the request and the second with the successful response:
 
 ```typescript
-[Hero] ngrx/data/query-all
-[Hero] ngrx/data/query-all/success
+[Hero] NgRx Data/query-all
+[Hero] NgRx Data/query-all-success
 ```
 
 This default `entityName` tag identifies the action's target entity collection.
@@ -139,11 +138,8 @@ where that action is dispatched by your code.
 For example,
 
 ```typescript
-const action = this.entityActionFactory.create<Hero>(
-  'Hero',
-  EntityOp.QUERY_ALL,
-  null,
-  { tag: 'Load Heroes On Start' }
+const action = entityActionFactory<Hero>(
+  'Hero', EntityOp.QUERY_ALL, null, 'Load Heroes On Start'
 );
 
 store.dispatch(action);
@@ -152,8 +148,8 @@ store.dispatch(action);
 The action log now looks like this:
 
 ```typescript
-[Load Heroes On Start] ngrx/data/query-all
-[Load Heroes On Start] ngrx/data/query-all/success
+[Load Heroes On Start] NgRx Data/query-all
+[Load Heroes On Start] NgRx Data/query-all-success
 ```
 
 ### Handcrafted _EntityAction_

@@ -13,13 +13,13 @@ import {
   platformVersion,
   findModuleFromOptions,
   insertImport,
+  InsertChange,
   getProjectPath,
   parseName,
   addImportToModule,
   createReplaceChange,
   ReplaceChange,
-  visitTSSourceFiles,
-  commitChanges,
+  createChangeRecorder,
 } from '@ngrx/data/schematics-core';
 import { Schema as EntityDataOptions } from './schema';
 
@@ -68,7 +68,13 @@ function addEntityDataToNgModule(options: EntityDataOptions): Rule {
     );
 
     const changes = [effectsModuleImport, dateEntityNgModuleImport];
-    commitChanges(host, source.fileName, changes);
+    const recorder = host.beginUpdate(modulePath);
+    for (const change of changes) {
+      if (change instanceof InsertChange) {
+        recorder.insertLeft(change.pos, change.toAdd);
+      }
+    }
+    host.commitUpdate(recorder);
 
     return host;
   };
@@ -97,9 +103,23 @@ function removeAngularNgRxDataFromPackageJson() {
   };
 }
 
-function renameNgrxDataModule() {
-  return (host: Tree) => {
-    visitTSSourceFiles(host, sourceFile => {
+function renameNgrxDataModule(options: EntityDataOptions) {
+  return (host: Tree, context: SchematicContext) => {
+    host.visit(path => {
+      if (!path.endsWith('.ts')) {
+        return;
+      }
+
+      const sourceFile = ts.createSourceFile(
+        path,
+        host.read(path)!.toString(),
+        ts.ScriptTarget.Latest
+      );
+
+      if (sourceFile.isDeclarationFile) {
+        return;
+      }
+
       const ngrxDataImports = sourceFile.statements
         .filter(ts.isImportDeclaration)
         .filter(
@@ -117,7 +137,12 @@ function renameNgrxDataModule() {
         ...findNgrxDataReplacements(sourceFile),
       ];
 
-      commitChanges(host, sourceFile.fileName, changes);
+      if (changes.length === 0) {
+        return;
+      }
+
+      const recorder = createChangeRecorder(host, path, changes);
+      host.commitUpdate(recorder);
     });
   };
 }
@@ -265,7 +290,7 @@ export default function(options: EntityDataOptions): Rule {
       options.migrateNgrxData
         ? chain([
             removeAngularNgRxDataFromPackageJson(),
-            renameNgrxDataModule(),
+            renameNgrxDataModule(options),
           ])
         : addEntityDataToNgModule(options),
     ])(host, context);

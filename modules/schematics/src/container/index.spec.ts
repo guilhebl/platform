@@ -110,41 +110,6 @@ describe('Container Schematic', () => {
   });
 
   it('should update the component spec', async () => {
-    const options = { ...defaultOptions, spec: true, testDepth: 'unit' };
-    const tree = await schematicRunner
-      .runSchematicAsync('container', options, appTree)
-      .toPromise();
-    const content = tree.readContent(
-      `${projectPath}/src/app/foo/foo.component.spec.ts`
-    );
-    expect(content).toMatch(
-      /import { provideMockStore, MockStore } from '@ngrx\/store\/testing';/
-    );
-  });
-
-  it('should use the provideMockStore helper if unit', async () => {
-    const options = { ...defaultOptions, spec: true, testDepth: 'unit' };
-    const tree = await schematicRunner
-      .runSchematicAsync('container', options, appTree)
-      .toPromise();
-    const content = tree.readContent(
-      `${projectPath}/src/app/foo/foo.component.spec.ts`
-    );
-    expect(content).toMatch(/providers: \[ provideMockStore\(\) \]/);
-  });
-
-  it('should inject Store correctly', async () => {
-    const options = { ...defaultOptions, spec: true };
-    const tree = await schematicRunner
-      .runSchematicAsync('container', options, appTree)
-      .toPromise();
-    const content = tree.readContent(
-      `${projectPath}/src/app/foo/foo.component.spec.ts`
-    );
-    expect(content).toMatch(/store = TestBed\.get<Store>\(Store\);/);
-  });
-
-  it('should use StoreModule if integration test', async () => {
     const options = { ...defaultOptions, spec: true };
     const tree = await schematicRunner
       .runSchematicAsync('container', options, appTree)

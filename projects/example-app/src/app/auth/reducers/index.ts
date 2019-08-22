@@ -8,27 +8,23 @@ import * as fromRoot from '@example-app/reducers';
 import * as fromAuth from '@example-app/auth/reducers/auth.reducer';
 import * as fromLoginPage from '@example-app/auth/reducers/login-page.reducer';
 
-export const authFeatureKey = 'auth';
-
 export interface AuthState {
-  [fromAuth.statusFeatureKey]: fromAuth.State;
-  [fromLoginPage.loginPageFeatureKey]: fromLoginPage.State;
+  status: fromAuth.State;
+  loginPage: fromLoginPage.State;
 }
 
 export interface State extends fromRoot.State {
-  [authFeatureKey]: AuthState;
+  auth: AuthState;
 }
 
 export function reducers(state: AuthState | undefined, action: Action) {
   return combineReducers({
-    [fromAuth.statusFeatureKey]: fromAuth.reducer,
-    [fromLoginPage.loginPageFeatureKey]: fromLoginPage.reducer,
+    status: fromAuth.reducer,
+    loginPage: fromLoginPage.reducer,
   })(state, action);
 }
 
-export const selectAuthState = createFeatureSelector<State, AuthState>(
-  authFeatureKey
-);
+export const selectAuthState = createFeatureSelector<State, AuthState>('auth');
 
 export const selectAuthStatusState = createSelector(
   selectAuthState,

@@ -1,5 +1,10 @@
 import { Update } from '@ngrx/entity';
-import { EntityCollection } from './entity-collection';
+import {
+  ChangeState,
+  ChangeStateMap,
+  ChangeType,
+  EntityCollection,
+} from './entity-collection';
 import { MergeStrategy } from '../actions/merge-strategy';
 import { UpdateResponseData } from '../actions/update-response-data';
 

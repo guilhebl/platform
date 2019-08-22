@@ -12,7 +12,6 @@ import {
   url,
   noop,
   move,
-  filter,
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import {
@@ -56,49 +55,20 @@ function addImportToNgModule(options: RootStoreOptions): Rule {
       true
     );
 
-    const storeModuleReducers = options.minimal ? `{}` : `reducers`;
-
-    const storeModuleConfig = options.minimal
-      ? `{
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }`
-      : `{
-      metaReducers,
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true
-      }
-    }`;
-    const storeModuleSetup = `StoreModule.forRoot(${storeModuleReducers}, ${storeModuleConfig})`;
-
     const statePath = `/${options.path}/${options.statePath}`;
     const relativePath = buildRelativePath(modulePath, statePath);
     const [storeNgModuleImport] = addImportToModule(
       source,
       modulePath,
-      storeModuleSetup,
+      'StoreModule.forRoot(reducers, { metaReducers })',
       relativePath
     );
 
-    let changes = [
+    const changes = [
       insertImport(source, modulePath, 'StoreModule', '@ngrx/store'),
+      insertImport(source, modulePath, 'reducers, metaReducers', relativePath),
       storeNgModuleImport,
     ];
-
-    if (!options.minimal) {
-      changes = changes.concat([
-        insertImport(
-          source,
-          modulePath,
-          'reducers, metaReducers',
-          relativePath
-        ),
-      ]);
-    }
-
     const recorder = host.beginUpdate(modulePath);
 
     for (const change of changes) {
@@ -152,7 +122,6 @@ export default function(options: RootStoreOptions): Rule {
     }
 
     const templateSource = apply(url('./files'), [
-      filter(_ => (options.minimal ? false : true)),
       applyTemplates({
         ...stringUtils,
         ...options,

@@ -76,19 +76,6 @@ describe('Reducer Schematic', () => {
     ).toBeGreaterThanOrEqual(0);
   });
 
-  it('should create a featureKey', () => {
-    const tree = schematicRunner.runSchematic(
-      'reducer',
-      defaultOptions,
-      appTree
-    );
-    const fileContent = tree.readContent(
-      `${projectPath}/src/app/foo.reducer.ts`
-    );
-
-    expect(fileContent).toMatch(/fooFeatureKey = 'foo'/);
-  });
-
   it('should create an reducer function', () => {
     const tree = schematicRunner.runSchematic(
       'reducer',
@@ -130,7 +117,7 @@ describe('Reducer Schematic', () => {
       `${projectPath}/src/app/reducers/index.ts`
     );
 
-    expect(reducers).toMatch(/\[fromFoo.fooFeatureKey\]\: fromFoo.State/);
+    expect(reducers).toMatch(/foo\: fromFoo.State/);
   });
 
   it('should add the reducer function to the ActionReducerMap', () => {
@@ -141,7 +128,7 @@ describe('Reducer Schematic', () => {
       `${projectPath}/src/app/reducers/index.ts`
     );
 
-    expect(reducers).toMatch(/\[fromFoo.fooFeatureKey\]\: fromFoo.reducer/);
+    expect(reducers).toMatch(/foo\: fromFoo.reducer/);
   });
 
   it('should group within a "reducers" folder if group is set', () => {

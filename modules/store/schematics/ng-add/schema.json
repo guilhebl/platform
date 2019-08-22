@@ -37,12 +37,6 @@
       "default": "State",
       "description": "Specifies the interface for the state.",
       "alias": "si"
-    },
-    "minimal": {
-      "type": "boolean",
-      "default": false,
-      "description":
-        "Setup state management without registering initial reducers."
     }
   },
   "required": []

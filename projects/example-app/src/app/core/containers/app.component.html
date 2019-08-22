@@ -1,0 +1,26 @@
+<bc-layout>
+    <bc-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">      
+      <bc-nav-item (navigate)="closeSidenav()" routerLink="/products/" icon="public" hint="Home">    
+          Home
+      </bc-nav-item>
+    
+      <bc-nav-item (navigate)="closeSidenav()" routerLink="/products/find" icon="public" hint="Find your Product">
+        Browse Products
+      </bc-nav-item>
+      <bc-nav-item (navigate)="closeSidenav()" routerLink="/products/collection" icon="style" hint="View your collection">
+        My Product Collection
+      </bc-nav-item>
+      <!--
+      <bc-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
+        Sign In
+      </bc-nav-item>
+      <bc-nav-item (navigate)="logout()" *ngIf="loggedIn$ | async">
+        Sign Out
+      </bc-nav-item>
+      -->
+    </bc-sidenav>
+    <bc-toolbar (openMenu)="openSidenav()">
+      SearchProd
+    </bc-toolbar>
+    <router-outlet></router-outlet>
+  </bc-layout>

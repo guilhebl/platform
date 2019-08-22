@@ -11,8 +11,6 @@ import {
   template,
   url,
   move,
-  filter,
-  noop,
 } from '@angular-devkit/schematics';
 import { Path, dirname } from '@angular-devkit/core';
 import * as ts from 'typescript';
@@ -63,30 +61,14 @@ function addImportToNgModule(options: StoreOptions): Rule {
       `${options.path}/environments/environment`
     );
 
-    const runtimeChecks = `
-      runtimeChecks: {
-        strictStateImmutability: true,
-        strictActionImmutability: true,
-      }
-   `;
-
-    const rootStoreReducers = options.minimal ? `{}` : `reducers`;
-
-    const rootStoreConfig = options.minimal
-      ? `{ ${runtimeChecks} }`
-      : `{
-      metaReducers, ${runtimeChecks} }`;
-
     const storeNgModuleImport = addImportToModule(
       source,
       modulePath,
       options.root
-        ? `StoreModule.forRoot(${rootStoreReducers}, ${rootStoreConfig})`
-        : `StoreModule.forFeature(from${stringUtils.classify(
+        ? `StoreModule.forRoot(reducers, { metaReducers })`
+        : `StoreModule.forFeature('${stringUtils.camelize(
             options.name
-          )}.${stringUtils.camelize(
-            options.name
-          )}FeatureKey, from${stringUtils.classify(
+          )}', from${stringUtils.classify(
             options.name
           )}.reducers, { metaReducers: from${stringUtils.classify(
             options.name
@@ -96,30 +78,22 @@ function addImportToNgModule(options: StoreOptions): Rule {
 
     let commonImports = [
       insertImport(source, modulePath, 'StoreModule', '@ngrx/store'),
+      options.root
+        ? insertImport(
+            source,
+            modulePath,
+            'reducers, metaReducers',
+            relativePath
+          )
+        : insertImport(
+            source,
+            modulePath,
+            `* as from${stringUtils.classify(options.name)}`,
+            relativePath,
+            true
+          ),
       storeNgModuleImport,
     ];
-
-    if (options.root && !options.minimal) {
-      commonImports = commonImports.concat([
-        insertImport(
-          source,
-          modulePath,
-          'reducers, metaReducers',
-          relativePath
-        ),
-      ]);
-    } else if (!options.root) {
-      commonImports = commonImports.concat([
-        insertImport(
-          source,
-          modulePath,
-          `* as from${stringUtils.classify(options.name)}`,
-          relativePath,
-          true
-        ),
-      ]);
-    }
-
     let rootImports: (Change | undefined)[] = [];
 
     if (options.root) {
@@ -187,7 +161,6 @@ export default function(options: StoreOptions): Rule {
     }
 
     const templateSource = apply(url('./files'), [
-      options.root && options.minimal ? filter(_ => false) : noop(),
       applyTemplates({
         ...stringUtils,
         ...(options as object),

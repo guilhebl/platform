@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-card-title> My Product Collection </mat-card-title>
+    <mat-card-subtitle *ngIf="(products$ | async)?.length == 0">
+        <span>
+            <h4>Collection is Empty</h4>
+            <a class="find-products-link" mat-list-item [routerLink]="['/products/find']">Find Products</a>
+        </span>
+    </mat-card-subtitle>
+
+    <mat-card-actions align="end" *ngIf="(products$ | async)?.length > 0">
+        <button mat-raised-button color="primary" (click)="clear()">
+            Clear
+        </button>
+    </mat-card-actions>
+</mat-card>
+<bc-product-preview-list [products]="products$ | async"></bc-product-preview-list>

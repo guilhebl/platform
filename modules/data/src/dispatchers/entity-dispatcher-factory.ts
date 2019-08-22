@@ -1,20 +1,24 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { Action, Store, ScannedActionsSubject } from '@ngrx/store';
-import { IdSelector } from '@ngrx/entity';
+import { IdSelector, Update } from '@ngrx/entity';
 import { Observable, Subscription } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 
 import { CorrelationIdGenerator } from '../utils/correlation-id-generator';
 import { EntityDispatcherDefaultOptions } from './entity-dispatcher-default-options';
-import { defaultSelectId } from '../utils/utilities';
+import { defaultSelectId, toUpdateFactory } from '../utils/utilities';
+import { EntityAction } from '../actions/entity-action';
 import { EntityActionFactory } from '../actions/entity-action-factory';
 import { EntityCache } from '../reducers/entity-cache';
 import {
   EntityCacheSelector,
   ENTITY_CACHE_SELECTOR_TOKEN,
+  createEntityCacheSelector,
 } from '../selectors/entity-cache-selector';
 import { EntityDispatcher } from './entity-dispatcher';
 import { EntityDispatcherBase } from './entity-dispatcher-base';
+import { EntityOp } from '../actions/entity-op';
+import { QueryParams } from '../dataservices/interfaces';
 
 /** Creates EntityDispatchers for entity collections */
 @Injectable()

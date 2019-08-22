@@ -1,0 +1,47 @@
+<!-- <a *ngIf="sourceName !== 'ebay.com'" [routerLink]="['/products/detail', id]" [queryParams]="{source: sourceName, idType: idType}" ></a> -->
+
+<a [routerLink]="['/products/detail', id]" [queryParams]="{source: sourceName, idType: idType}" >
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <img [src]="source" class="example-header-image">
+            </div>
+            <mat-card-title class="product-title">
+                <h4>{{ title }}</h4>
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="subtitle">{{ subtitle }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="priceSection">
+                <span class="price-symbol">$</span>
+                <span class="price">{{ price }}</span>
+            </div>
+        </mat-card-content>
+        <!-- <div class="crop2"> -->
+            <img mat-card-image *ngIf="thumbnail" [src]="thumbnail" class="thumbnail-img">
+        <!-- </div> -->
+    </mat-card>
+</a>
+
+<!-- <a *ngIf="sourceName === 'ebay.com'" [href]="url" >
+    <mat-card class="example-card">
+        <mat-card-header>
+            <div mat-card-avatar>
+                <img [src]="source" class="example-header-image">
+            </div>
+            <mat-card-title class="product-title">
+                <h4>{{ title }}</h4>
+            </mat-card-title>
+            <mat-card-subtitle *ngIf="subtitle">{{ subtitle }}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="priceSection">
+                <span class="price-symbol">$</span>
+                <span class="price">{{ price }}</span>
+            </div>
+        </mat-card-content>
+        <div class="crop">
+            <img mat-card-image *ngIf="thumbnail" [src]="thumbnail" class="thumbnail-img">
+        </div>
+    </mat-card>
+</a> -->

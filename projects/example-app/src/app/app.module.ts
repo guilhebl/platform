@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AuthModule } from '@example-app/auth';
+// import { AuthModule } from '@example-app/auth';
 
 import { ROOT_REDUCERS, metaReducers } from '@example-app/reducers';
 
@@ -24,7 +24,7 @@ import { AppComponent } from '@example-app/core/containers';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AuthModule,
+    // AuthModule,
     AppRoutingModule,
 
     /**
@@ -62,7 +62,7 @@ import { AppComponent } from '@example-app/core/containers';
      * See: https://github.com/zalmoxisus/redux-devtools-extension
      */
     StoreDevtoolsModule.instrument({
-      name: 'NgRx Book Store App',
+      name: 'NgRx Product Store App',
 
       // In a production build you would want to disable the Store Devtools
       // logOnly: environment.production,

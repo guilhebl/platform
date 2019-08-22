@@ -15,10 +15,6 @@ export type TypeId<T> = () => T;
 
 export type InitialState<T> = Partial<T> | TypeId<Partial<T>> | void;
 
-/**
- * A function that takes an `Action` and a `State`, and returns a `State`.
- * See `createReducer`.
- */
 export interface ActionReducer<T, V extends Action = Action> {
   (state: T | undefined, action: V): T;
 }
@@ -61,9 +57,6 @@ export const typePropertyIsNotAllowedMsg =
   'type property is not allowed in action creators';
 type TypePropertyIsNotAllowed = typeof typePropertyIsNotAllowedMsg;
 
-/**
- * A function that returns an object in the shape of the `Action` interface.  Configured using `createAction`.
- */
 export type Creator<
   P extends any[] = any[],
   R extends object = object
@@ -75,9 +68,6 @@ export type PropsReturnType<T extends object> = T extends { type: any }
   ? TypePropertyIsNotAllowed
   : { _as: 'props'; _p: T };
 
-/**
- * See `Creator`.
- */
 export type ActionCreator<
   T extends string = string,
   C extends Creator = Creator

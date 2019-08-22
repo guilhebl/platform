@@ -2,8 +2,6 @@ import { createReducer, on } from '@ngrx/store';
 
 import { LayoutActions } from '@example-app/core/actions';
 
-export const layoutFeatureKey = 'layout';
-
 export interface State {
   showSidenav: boolean;
 }

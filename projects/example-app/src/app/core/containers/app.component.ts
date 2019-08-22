@@ -10,29 +10,7 @@ import { LayoutActions } from '@example-app/core/actions';
 @Component({
   selector: 'bc-app',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <bc-layout>
-      <bc-sidenav [open]="showSidenav$ | async" (closeMenu)="closeSidenav()">
-        <bc-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/" icon="book" hint="View your book collection">
-          My Collection
-        </bc-nav-item>
-        <bc-nav-item (navigate)="closeSidenav()" *ngIf="loggedIn$ | async" routerLink="/books/find" icon="search" hint="Find your next book!">
-          Browse Books
-        </bc-nav-item>
-        <bc-nav-item (navigate)="closeSidenav()" *ngIf="!(loggedIn$ | async)">
-          Sign In
-        </bc-nav-item>
-        <bc-nav-item (navigate)="logout()" *ngIf="loggedIn$ | async">
-          Sign Out
-        </bc-nav-item>
-      </bc-sidenav>
-      <bc-toolbar (openMenu)="openSidenav()">
-        Book Collection
-      </bc-toolbar>
-
-      <router-outlet></router-outlet>
-    </bc-layout>
-  `,
+  templateUrl: 'app.component.html',
 })
 export class AppComponent {
   showSidenav$: Observable<boolean>;
@@ -44,7 +22,7 @@ export class AppComponent {
      * tree to the provided selector
      */
     this.showSidenav$ = this.store.pipe(select(fromRoot.getShowSidenav));
-    this.loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
+    //this.loggedIn$ = this.store.pipe(select(fromAuth.getLoggedIn));
   }
 
   closeSidenav() {

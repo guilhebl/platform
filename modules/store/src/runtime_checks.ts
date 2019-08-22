@@ -8,7 +8,6 @@ import {
   _USER_RUNTIME_CHECKS,
   _ACTIVE_RUNTIME_CHECKS,
   META_REDUCERS,
-  USER_RUNTIME_CHECKS,
 } from './tokens';
 
 export function createActiveRuntimeChecks(
@@ -72,13 +71,8 @@ export function provideRuntimeChecks(
       useValue: runtimeChecks,
     },
     {
-      provide: USER_RUNTIME_CHECKS,
-      useFactory: _runtimeChecksFactory,
-      deps: [_USER_RUNTIME_CHECKS],
-    },
-    {
       provide: _ACTIVE_RUNTIME_CHECKS,
-      deps: [USER_RUNTIME_CHECKS],
+      deps: [_USER_RUNTIME_CHECKS],
       useFactory: createActiveRuntimeChecks,
     },
     {
@@ -94,10 +88,4 @@ export function provideRuntimeChecks(
       useFactory: createSerializationCheckMetaReducer,
     },
   ];
-}
-
-export function _runtimeChecksFactory(
-  runtimeChecks: RuntimeChecks
-): RuntimeChecks {
-  return runtimeChecks;
 }

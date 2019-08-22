@@ -1,0 +1,62 @@
+<mat-spinner [class.show]="loading" [diameter]="30" [strokeWidth]="3"></mat-spinner>
+<mat-card *ngIf="!loading">
+  <mat-card-title-group>
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-subtitle>
+      {{ subtitle }}
+      <div [innerHtml]="description"></div>
+      <div class="priceSection">
+        <a href="#" (click)="buy(productDetail.product.sourceItemDetailViewUrl)"><mat-icon>attach_money</mat-icon></a>
+        <span class="price">{{ price }}</span>
+      </div>
+    </mat-card-subtitle>
+
+    <img [src]="source" class="img-logo" />
+  </mat-card-title-group>
+  <mat-card-content>
+
+    <div class="product-container">
+      <div class="product-section">
+        <div class="img-container">            
+            <img mat-card-image [src]="thumbnail" class="thumbnail-img">
+        </div>
+      </div>
+
+      <div class="product-section">
+        <div *ngIf="productDetail && productDetail.productDetailItems.length > 0">
+          <mat-list>
+            <h3 mat-subheader class="other-prices">Other Prices</h3>
+            <mat-list-item *ngFor="let detailItem of productDetail.productDetailItems">
+              <a href="#" (click)="buy(detailItem.sourceItemDetailViewUrl)">
+                <img [src]="detailItem.sourceImageUrl" class="detailItemImg" alt="{{detailItem.sourceName}}">
+              </a>
+
+              <p matLine>
+                <a href="#" (click)="buy(detailItem.sourceItemDetailViewUrl)"><mat-icon>attach_money</mat-icon></a>
+                <span class="price-competitor">{{ detailItem.price }}</span>
+              </p>              
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </div>
+    </div>
+
+  </mat-card-content>
+  <mat-card-actions align="start">
+    <button mat-raised-button color="primary" (click)="buy(productDetail.product.sourceItemDetailViewUrl)">
+      Buy
+    </button>
+    <button mat-raised-button color="warn" *ngIf="inCollection" (click)="remove.emit(productDetail.product)">
+      Remove from Collection
+    </button>
+    <button mat-raised-button color="primary" *ngIf="!inCollection" (click)="add.emit(productDetail.product)">
+      Add to Collection
+    </button>
+  </mat-card-actions>
+  <div fxFlex></div>
+  <mat-card-actions align="end">
+    <button mat-raised-button color="back" (click)="back()">
+      Back
+    </button>
+  </mat-card-actions>
+</mat-card>

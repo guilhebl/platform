@@ -10,7 +10,7 @@ import {
 } from '@example-app/auth/components';
 
 import { AuthEffects } from '@example-app/auth/effects';
-import * as fromAuth from '@example-app/auth/reducers';
+import { reducers } from '@example-app/auth/reducers';
 import { MaterialModule } from '@example-app/material';
 import { AuthRoutingModule } from './auth-routing.module';
 
@@ -20,13 +20,15 @@ export const COMPONENTS = [
   LogoutConfirmationDialogComponent,
 ];
 
+console.log('Auth module');
+
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
     AuthRoutingModule,
-    StoreModule.forFeature(fromAuth.authFeatureKey, fromAuth.reducers),
+    StoreModule.forFeature('auth', reducers),
     EffectsModule.forFeature([AuthEffects]),
   ],
   declarations: COMPONENTS,

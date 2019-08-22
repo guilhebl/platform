@@ -1,0 +1,12 @@
+mat-card-title {
+    display: flex;
+    justify-content: center;
+  }
+  mat-card-subtitle {
+    display: flex;
+    justify-content: center;
+  }
+  .find-products-link {
+    display: inline;
+    font-weight: bold;
+  }
