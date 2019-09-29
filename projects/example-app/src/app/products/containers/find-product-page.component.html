@@ -1,0 +1,2 @@
+<bc-product-search [query]="searchQuery$ | async" [searching]="loading$ | async" [error]="error$ | async" (search)="search($event)"></bc-product-search>
+<bc-product-preview-list *ngIf='!(loading$ | async)' [products]="products$ | async"></bc-product-preview-list>

@@ -10,14 +10,7 @@ import * as fromProducts from '@example-app/products/reducers';
 @Component({
   selector: 'bc-selected-product-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <bc-product-detail
-      [productDetail]="productDetail$ | async"      
-      [inCollection]="isSelectedProductInCollection$ | async"
-      (add)="addToCollection($event)"
-      (remove)="removeFromCollection($event)">
-    </bc-product-detail>
-  `,
+  templateUrl: 'selected-product-page.component.html'
 })
 export class SelectedProductPageComponent {
   productDetail$: Observable<ProductDetail>;

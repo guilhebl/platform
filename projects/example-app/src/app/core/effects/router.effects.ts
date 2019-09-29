@@ -18,7 +18,8 @@ export class RouterEffects {
           return route;
         }),
         mergeMap(route => route.data),
-        map(data => `Book Collection - ${data['title']}`),
+        // map(data => `Book Collection - ${data['title']}`),
+        map(data => 'Product Collection'),
         tap(title => this.titleService.setTitle(title))
       ),
     {

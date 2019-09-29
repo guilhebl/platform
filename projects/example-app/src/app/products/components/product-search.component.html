@@ -2,9 +2,7 @@
     <mat-card-title>
         Find a Product
     </mat-card-title>
-    <!-- <mat-card-subtitle *ngIf="isTrendingSearch">
-        Trending
-    </mat-card-subtitle>     -->
+
     <mat-card-content>
         <mat-form-field>
             <input matInput placeholder="Search for a product" [value]="query" (keyup)="search.emit($event.target.value)">

@@ -10,10 +10,7 @@ import * as fromProducts from '@example-app/products/reducers';
 @Component({
   selector: 'bc-find-product-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `
-    <bc-product-search [query]="searchQuery$ | async" [searching]="loading$ | async" [error]="error$ | async" (search)="search($event)"></bc-product-search>
-    <bc-product-preview-list [products]="products$ | async"></bc-product-preview-list>
-  `,
+  templateUrl: 'find-product-page.component.html',
 })
 export class FindProductPageComponent {
   searchQuery$: Observable<string>;

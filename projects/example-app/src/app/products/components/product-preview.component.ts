@@ -19,6 +19,9 @@ export class ProductPreviewComponent {
   }
 
   shorten(s: string): string {
+    if (!s) {
+      return '';
+    }
     return s.length > 64 ? s.substr(0, 61) + '...' : s;
   }
 

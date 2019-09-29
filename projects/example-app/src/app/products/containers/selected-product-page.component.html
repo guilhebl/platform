@@ -1,0 +1,7 @@
+<bc-product-detail
+    *ngIf='!(loading$ | async)'
+    [productDetail]="productDetail$ | async"      
+    [inCollection]="isSelectedProductInCollection$ | async"
+    (add)="addToCollection($event)"
+    (remove)="removeFromCollection($event)">
+</bc-product-detail>

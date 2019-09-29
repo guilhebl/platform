@@ -14,7 +14,7 @@ import {
   providedIn: 'root',
 })
 export class ProductService {
-  private API_PATH = 'http://localhost:8080/products';
+  private API_PATH = 'http://localhost:8080/products';  
 
   constructor(private http: HttpClient) {}
 
